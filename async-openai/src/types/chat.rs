@@ -696,6 +696,10 @@ pub struct ChatChoice {
     pub logprobs: Option<ChatChoiceLogprobs>,
 }
 
+fn default_obj() -> String {
+    "chat.completion".to_owned()
+}
+
 /// Represents a chat completion response returned by model, based on the provided input.
 #[derive(Debug, Deserialize, Clone, PartialEq, Serialize)]
 pub struct CreateChatCompletionResponse {
@@ -715,6 +719,7 @@ pub struct CreateChatCompletionResponse {
     pub system_fingerprint: Option<String>,
 
     /// The object type, which is always `chat.completion`.
+    #[serde(default = "default_obj")]
     pub object: String,
     pub usage: Option<CompletionUsage>,
 }
